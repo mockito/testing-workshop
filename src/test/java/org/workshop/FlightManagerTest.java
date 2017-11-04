@@ -7,10 +7,11 @@ import static org.junit.Assert.fail;
 
 public class FlightManagerTest {
 
+    FlightManager manager = new FlightManager();
+
     @Test
     public void should_provide_available_seats() throws Exception {
         //given
-        FlightManager manager = new FlightManager();
         manager.addFlight("AA101", 10);
 
         //when
@@ -23,9 +24,6 @@ public class FlightManagerTest {
     @Test
     public void should_fail_when_flight_not_found() throws Exception {
         //given
-        FlightManager manager = new FlightManager();
-        manager.addFlight("AA101", 10);
-
         try {
             //when
             manager.getAvailableSeats("UA999");
