@@ -11,6 +11,10 @@ public class FlightManager {
     }
 
     public int getAvailableSeats(String flightNo) {
-        return flights.get(flightNo);
+        Integer seats = flights.get(flightNo);
+        if (seats == null) {
+            throw new FlightNotFoundException();
+        }
+        return seats;
     }
 }
