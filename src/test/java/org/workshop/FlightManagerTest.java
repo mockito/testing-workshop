@@ -12,7 +12,7 @@ public class FlightManagerTest {
     @Test
     public void should_provide_available_seats() throws Exception {
         //given
-        manager.addFlight("AA101", new Seat(100), new Seat(200), new Seat(300));
+        manager.addFlight("AA101", new Seat("21A", 100), new Seat("22A", 200), new Seat("23A", 300));
 
         //when
         int seats = manager.getFlight("AA101").getAvailableSeats();
@@ -36,7 +36,7 @@ public class FlightManagerTest {
     @Test
     public void should_provide_cheapest_seat() throws Exception {
         //given
-        manager.addFlight("AA101", new Seat(100), new Seat(200));
+        manager.addFlight("AA101", new Seat("21A", 100), new Seat("22A", 200));
 
         //when
         Seat cheapest = manager.getFlight("AA101").getCheapestSeat();
@@ -48,13 +48,18 @@ public class FlightManagerTest {
     @Test
     public void should_book_seat() throws Exception {
         //given
-        manager.addFlight("AA101", new Seat("21A", 100), new Seat("21K", 200));
+        manager.addFlight("AA101", new Seat("21A", 100), new Seat("22K", 200));
 
         //when
         manager.getFlight("AA101").book("21A");
 
         //then
         assertEquals(1, manager.getFlight("AA101").getAvailableSeats());
+    }
+
+    @Test
+    public void should_not_allow_flight_with_no_seats() throws Exception {
+
     }
 
     @Test
