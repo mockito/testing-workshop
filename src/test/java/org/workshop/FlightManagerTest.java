@@ -32,4 +32,25 @@ public class FlightManagerTest {
         } catch (FlightNotFoundException e) {
         }
     }
+
+    @Test
+    public void should_provide_cheapest_seat() throws Exception {
+        //given
+        manager.addFlight("AA101", new Seat(100), new Seat(200));
+
+        //when
+        Seat cheapest = manager.getCheapestSeat("AA101");
+
+        //then
+        assertEquals(100, cheapest.getPrice());
+    }
+
+    @Test
+    public void should_fail_when_no_flight_when_getting_cheapest_seat() throws Exception {
+        //given
+
+        //when
+
+        //then
+    }
 }
