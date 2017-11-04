@@ -44,4 +44,25 @@ public class FlightManagerTest {
         //then
         assertEquals(100, cheapest.getPrice());
     }
+
+    @Test
+    public void should_book_seat() throws Exception {
+        //given
+        manager.addFlight("AA101", new Seat("21A", 100), new Seat("21K", 200));
+
+        //when
+        manager.getFlight("AA101").book("21A");
+
+        //then
+        assertEquals(1, manager.getFlight("AA101").getAvailableSeats());
+    }
+
+    @Test
+    public void should_book_only_available_seat() throws Exception {
+        //given
+
+        //when
+
+        //then
+    }
 }
