@@ -1,34 +1,20 @@
 package org.workshop;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.asList;
-
 public class FlightManager {
-    private Map<String, List<Seat>> flights = new HashMap<>();
-
-    public int getAvailableSeats(String flightNo) {
-        List<Seat> seats = flights.get(flightNo);
-        if (seats == null) {
-            throw new FlightNotFoundException();
-        }
-        return seats.size();
-    }
+    private Map<String, Flight> flights = new HashMap<>();
 
     public void addFlight(String flightNo, Seat ... seats) {
-        this.flights.put(flightNo, asList(seats));
+        this.flights.put(flightNo, new Flight(seats));
     }
 
-    public Seat getCheapestSeat(String flightNo) {
-        List<Seat> seats = flights.get(flightNo);
-        Seat cheapest = null;
-        for (Seat seat : seats) {
-            if (cheapest == null || seat.getPrice() < cheapest.getPrice()) {
-                cheapest = seat;
-            }
+    public Flight getFlight(String flightNo) {
+        Flight flight = flights.get(flightNo);
+        if (flight == null) {
+            throw new FlightNotFoundException();
         }
-        return cheapest;
+        return flight;
     }
 }
