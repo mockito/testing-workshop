@@ -2,6 +2,8 @@
 .settings
 .shelf
 *.iml
+*.ipr
+*.iws
 
 .gradle
 build
