@@ -17,7 +17,7 @@ configurations {
 	libs
 }
 
-task getLibs(type: Sync) {
+task refreshLibs(type: Sync) {
   from configurations.libs
   into "libs"
 }
