@@ -22,5 +22,16 @@ public class FlightManagerTest {
 
     @Test
     public void should_fail_when_flight_not_found() throws Exception {
+        //given
+        FlightManager manager = new FlightManager();
+        manager.addFlight("AA101", 10);
+
+        try {
+            //when
+            manager.getAvailableSeats("UA999");
+            //then
+            fail();
+        } catch (FlightNotFoundException e) {
+        }
     }
 }
