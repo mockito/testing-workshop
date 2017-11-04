@@ -1,0 +1,43 @@
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'java'
+
+dependencies {
+  //We are using checked-in dependencies to avoid poor internet connectivity
+  // when we run this workshop at a conference.
+  //In real life, don't check in your dependencies!
+  testCompile fileTree(dir: "libs")
+}
+
+repositories {
+	jcenter()
+}
+
+configurations {
+	libs
+}
+
+task getLibs(type: Sync) {
+  from configurations.libs
+  into "libs"
+}
+
+dependencies {
+  libs 'junit:junit:4.12'
+  libs 'eu.codearte.catch-exception:catch-exception:1.4.6'
+  libs 'org.assertj:assertj-core:3.8.0'
+  libs 'org.mockito:mockito-core:2.11.0'
+}
+
+eclipse.classpath.file.withXml {
+  //relativize the paths
+  def node = it.asNode()
+  node.classpathentry.findAll { it.@kind == 'lib' }.each {
+    def relPath = relativePath(project.projectDir, project.file(it.@path))
+    it.@path = relPath
+  }
+}
+
+File relativePath(File from, File to) {
+  new File(from.toURI().relativize(to.toURI()).toString())
+}
