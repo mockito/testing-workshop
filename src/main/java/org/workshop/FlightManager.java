@@ -9,10 +9,6 @@ import static java.util.Arrays.asList;
 public class FlightManager {
     private Map<String, List<Seat>> flights = new HashMap<>();
 
-    public void addFlight(String flightNo, int seats) {
-
-    }
-
     public int getAvailableSeats(String flightNo) {
         List<Seat> seats = flights.get(flightNo);
         if (seats == null) {

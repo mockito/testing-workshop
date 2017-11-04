@@ -12,13 +12,13 @@ public class FlightManagerTest {
     @Test
     public void should_provide_available_seats() throws Exception {
         //given
-        manager.addFlight("AA101", 10);
+        manager.addFlight("AA101", new Seat(100), new Seat(200), new Seat(300));
 
         //when
         int seats = manager.getAvailableSeats("AA101");
 
         //then
-        assertEquals(10, seats);
+        assertEquals(3, seats);
     }
 
     @Test
