@@ -8,6 +8,9 @@ public class Flight {
     private final Map<String, Seat> seats = new HashMap<>();
 
     public Flight(Seat ... seats) {
+        if (seats.length == 0) {
+            throw new IllegalArgumentException("Flight requires at least one seat");
+        }
         for (Seat seat : seats) {
             this.seats.put(seat.getSeatNo(), seat);
         }

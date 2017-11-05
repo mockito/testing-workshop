@@ -59,7 +59,10 @@ public class FlightManagerTest {
 
     @Test
     public void should_not_allow_flight_with_no_seats() throws Exception {
-
+        try {
+            manager.addFlight("AA101");
+            fail();
+        } catch (IllegalArgumentException e) {}
     }
 
     @Test
