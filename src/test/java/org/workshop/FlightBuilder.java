@@ -4,17 +4,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class FlightBuilder {
+    private static final String DEFAULT_FLIGHT_NO = "AA101";
+    private static final int DEFAULT_PRICE = 100;
+
     private final String flightNo;
     private List<Seat> seats = new LinkedList<>();
     private int seatNo = 1;
-    private int defaultPrice = 100;
 
     public FlightBuilder(String flightNo) {
         this.flightNo = flightNo;
     }
 
+    public FlightBuilder() {
+        this(DEFAULT_FLIGHT_NO);
+    }
+
     public FlightBuilder seat() {
-        seats.add(new Seat(defaultSeatNo(), defaultPrice));
+        seats.add(new Seat(defaultSeatNo(), DEFAULT_PRICE));
         return this;
     }
 
@@ -27,7 +33,7 @@ public class FlightBuilder {
     }
 
     public FlightBuilder seat(String seatNo) {
-        seats.add(new Seat(seatNo, defaultPrice));
+        seats.add(new Seat(seatNo, DEFAULT_PRICE));
         return this;
     }
 
