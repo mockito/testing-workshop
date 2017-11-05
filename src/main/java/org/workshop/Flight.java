@@ -48,6 +48,9 @@ public class Flight {
                 count++;
             }
         }
+        if (count == 0) {
+            throw new NoAvailableSeatsException();
+        }
         return total/count;
     }
 }

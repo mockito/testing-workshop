@@ -49,7 +49,17 @@ public class FlightTest {
 
     @Test
     public void should_fail_when_getting_average_when_no_available_seats() throws Exception {
+        //given
+        Flight flight = new FlightBuilder("AA101")
+                .seat(100, true).build();
 
+        try {
+            //when
+            flight.getAverageAvailablePrice();
+            //then
+            fail();
+        } catch (NoAvailableSeatsException e) {
+        }
     }
 
     @Test
