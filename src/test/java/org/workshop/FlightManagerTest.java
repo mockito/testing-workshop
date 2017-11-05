@@ -68,9 +68,14 @@ public class FlightManagerTest {
     @Test
     public void should_book_only_available_seat() throws Exception {
         //given
+        manager.addFlight("AA101", new Seat("21A", 100), new Seat("22K", 200));
+        manager.getFlight("AA101").book("21A");
 
-        //when
-
-        //then
+        try {
+            //when
+            manager.getFlight("AA101").book("21A");
+            //then
+            fail();
+        } catch (AlreadyBookedException e) {}
     }
 }

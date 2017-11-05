@@ -25,6 +25,10 @@ public class Flight {
     }
 
     public void book(String seatNo) {
-        seats.get(seatNo).setBooked(true);
+        Seat seat = seats.get(seatNo);
+        if (seat.isBooked()) {
+            throw new AlreadyBookedException();
+        }
+        seat.setBooked(true);
     }
 }
