@@ -33,6 +33,26 @@ public class FlightTest {
     }
 
     @Test
+    public void should_provide_average_price_of_non_booked_seats() throws Exception {
+        //given
+        Flight flight = new FlightBuilder("AA101")
+                .seat(100, false)
+                .seat(200, false)
+                .seat(300, true).build();
+
+        //when
+        int average = flight.getAverageAvailablePrice();
+
+        //then
+        assertEquals(150, average);
+    }
+
+    @Test
+    public void should_fail_when_getting_average_when_no_available_seats() throws Exception {
+
+    }
+
+    @Test
     public void should_book_seat() throws Exception {
         //given
         Flight flight = new FlightBuilder("AA101").seat("21A").seat("22K").build();
