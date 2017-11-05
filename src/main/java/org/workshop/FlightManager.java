@@ -6,8 +6,8 @@ import java.util.Map;
 public class FlightManager {
     private Map<String, Flight> flights = new HashMap<>();
 
-    public void addFlight(String flightNo, Seat ... seats) {
-        this.flights.put(flightNo, new Flight(seats));
+    public void addFlight(Flight flight) {
+        this.flights.put(flight.getFlightNo(), flight);
     }
 
     public Flight getFlight(String flightNo) {

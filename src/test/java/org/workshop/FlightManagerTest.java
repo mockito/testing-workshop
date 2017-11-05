@@ -12,7 +12,7 @@ public class FlightManagerTest {
     @Test
     public void should_provide_available_seats() throws Exception {
         //given
-        manager.addFlight("AA101", new Seat("21A", 100), new Seat("22A", 200), new Seat("23A", 300));
+        manager.addFlight(new FlightBuilder("AA101").seat().seat().seat().build());
 
         //when
         int seats = manager.getFlight("AA101").getAvailableSeats();
@@ -36,7 +36,7 @@ public class FlightManagerTest {
     @Test
     public void should_provide_cheapest_seat() throws Exception {
         //given
-        manager.addFlight("AA101", new Seat("21A", 100), new Seat("22A", 200));
+        manager.addFlight(new FlightBuilder("AA101").seat(100).seat(200).build());
 
         //when
         Seat cheapest = manager.getFlight("AA101").getCheapestSeat();
@@ -48,7 +48,7 @@ public class FlightManagerTest {
     @Test
     public void should_book_seat() throws Exception {
         //given
-        manager.addFlight("AA101", new Seat("21A", 100), new Seat("22K", 200));
+        manager.addFlight(new FlightBuilder("AA101").seat("21A").seat("22K").build());
 
         //when
         manager.getFlight("AA101").book("21A");
@@ -60,7 +60,7 @@ public class FlightManagerTest {
     @Test
     public void should_not_allow_flight_with_no_seats() throws Exception {
         try {
-            manager.addFlight("AA101");
+            manager.addFlight(new FlightBuilder("AA101").build());
             fail();
         } catch (IllegalArgumentException e) {}
     }
@@ -68,7 +68,7 @@ public class FlightManagerTest {
     @Test
     public void should_book_only_available_seat() throws Exception {
         //given
-        manager.addFlight("AA101", new Seat("21A", 100), new Seat("22K", 200));
+        manager.addFlight(new FlightBuilder("AA101").seat("21A").seat("22K").build());
         manager.getFlight("AA101").book("21A");
 
         try {

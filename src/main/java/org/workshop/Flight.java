@@ -1,14 +1,17 @@
 package org.workshop;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Flight {
 
     private final Map<String, Seat> seats = new HashMap<>();
+    private final String flightNo;
 
-    public Flight(Seat ... seats) {
-        if (seats.length == 0) {
+    public Flight(String flightNo, List<Seat> seats) {
+        this.flightNo = flightNo;
+        if (seats.size() == 0) {
             throw new IllegalArgumentException("Flight requires at least one seat");
         }
         for (Seat seat : seats) {
@@ -30,5 +33,9 @@ public class Flight {
             throw new AlreadyBookedException();
         }
         seat.setBooked(true);
+    }
+
+    public String getFlightNo() {
+        return flightNo;
     }
 }
