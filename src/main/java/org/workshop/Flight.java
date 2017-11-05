@@ -38,4 +38,16 @@ public class Flight {
     public String getFlightNo() {
         return flightNo;
     }
+
+    public int getAverageAvailablePrice() {
+        int total = 0;
+        int count = 0;
+        for (Seat seat : seats.values()) {
+            if (!seat.isBooked()) {
+                total += seat.getPrice();
+                count++;
+            }
+        }
+        return total/count;
+    }
 }

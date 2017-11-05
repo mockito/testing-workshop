@@ -35,4 +35,11 @@ public class FlightBuilder {
         seats.add(new Seat(defaultSeatNo(), price));
         return this;
     }
+
+    public FlightBuilder seat(int price, boolean booked) {
+        Seat seat = new Seat(defaultSeatNo(), price);
+        seat.setBooked(booked);
+        seats.add(seat);
+        return this;
+    }
 }
