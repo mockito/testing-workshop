@@ -16,6 +16,12 @@ From IDEA, use "File->Open" pointing to the "build.gradle" file.
 
 You can also open this project with Eclipse.
 
+### Prerequisites
+
+- JDK8 installed
+- IntelliJ IDEA installed (Community version ok, [download link](https://www.jetbrains.com/idea/download/index.html))
+    - Eclipse is ok but IDEA is highly recommended
+
 ## Want to learn how to write great tests?
 
 - attend "[Test First Immersion](https://qconsf.com/sf2017/workshop/test-first-immersion-workshop-java)" workshop at QCon San Francisco on Thursday 11/16/17.
