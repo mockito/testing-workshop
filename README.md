@@ -20,7 +20,7 @@ You can also open this project with Eclipse.
 
 - attend "[Test First Immersion](https://qconsf.com/sf2017/workshop/test-first-immersion-workshop-java)" workshop at QCon San Francisco on Thursday 11/16/17.
 - stay tuned for next QCon announcement
-- reach out to Szczepan on LinkedIn
+- reach out to [Szczepan Faber on LinkedIn](https://www.linkedin.com/in/mockitoguy)
 
 ## Why jars are checked in?
 
