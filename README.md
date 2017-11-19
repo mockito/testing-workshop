@@ -3,7 +3,9 @@
 Write amazing tests every day and you will see that your production code is super clean.
 Great tests -> great code.
 
-[Test First Immersion](https://qconsf.com/sf2017/workshop/test-first-immersion-workshop-java) workshop at QCon San Francisco on 11/16/17. See also [slides for the workshop](https://www.slideshare.net/SzczepanFaber/qcon17-workshop-test-first-immersion).
+- details of the workshop at QCon San Francisco 11/16/17: [Test First Immersion](https://qconsf.com/sf2017/workshop/test-first-immersion-workshop-java)
+- slides at [SlideShare](https://www.slideshare.net/SzczepanFaber/qcon17-workshop-test-first-immersion)
+- attendees [LinkedIn Group](https://www.linkedin.com/groups/13564002)
 
 ## What is this project?
 
