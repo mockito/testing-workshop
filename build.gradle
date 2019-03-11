@@ -25,8 +25,8 @@ task refreshLibs(type: Sync) {
 dependencies {
   libs 'junit:junit:4.12'
   libs 'eu.codearte.catch-exception:catch-exception:1.4.6'
-  libs 'org.assertj:assertj-core:3.8.0'
-  libs 'org.mockito:mockito-core:2.11.0'
+  libs 'org.assertj:assertj-core:3.+'
+  libs 'org.mockito:mockito-core:2.+'
 }
 
 eclipse.classpath.file.withXml {
