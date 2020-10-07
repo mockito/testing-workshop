@@ -1,14 +1,12 @@
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.ThrowableAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FlightManagerTest {
 
     @Test
-    public void should_show_available_seats() throws Exception {
+    public void should_show_available_seats() {
         //given
         FlightManager manager = new FlightManager();
         manager.addFlight("LH123", 5);
@@ -22,7 +20,7 @@ public class FlightManagerTest {
     }
 
     @Test
-    public void should_deal_with_missing_flight() throws Exception {
+    public void should_deal_with_missing_flight() {
         //given
         FlightManager manager = new FlightManager();
         manager.addFlight("LH123", 5);
