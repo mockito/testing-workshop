@@ -30,6 +30,9 @@ public class Flight {
 
     public Seat bookSeat(String seatNumber) {
         Seat seat = seats.get(seatNumber);
+        if (seat == null) {
+            throw new IllegalArgumentException("Seat number not found: 'FOO'");
+        }
         seat.setBooked(true);
         return seat;
     }
