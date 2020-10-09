@@ -61,4 +61,19 @@ public class FlightTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Cannot book seat 'A1' because it is already booked");
     }
+
+    @Test
+    void should_provide_average_price() {
+        //given
+        Flight flight = new Flight(
+                new Seat(50, "A1"),
+                new Seat(100, "A2"),
+                new Seat(200, "B1"));
+
+        //when
+        flight.bookSeat("B1");
+
+        //then
+        assertEquals(75, flight.getAveragePriceNonBooked());
+    }
 }

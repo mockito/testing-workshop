@@ -45,4 +45,10 @@ public class Flight {
     public String getFlightNumber() {
         return this.flightNumber;
     }
+
+    public int getAveragePriceNonBooked() {
+        return (int) this.seatsByPrice.stream()
+                .filter(seat -> !seat.isBooked())
+                .mapToInt(Seat::getPrice).average().getAsDouble();
+    }
 }
