@@ -27,13 +27,4 @@ public class FlightManagerTest {
                 () -> manager.getFlight("AA900"))
                 .isInstanceOf(FlightNotFoundException.class);
     }
-
-    @Test
-    public void should_not_allow_flights_with_no_seats() {
-        //expect
-        assertThatThrownBy(
-                () -> new FlightManager().addFlight("LH100"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Flights with no seats are not allowed.");
-    }
 }

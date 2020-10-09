@@ -13,6 +13,9 @@ public class Flight {
     }
 
     public Flight(String flightNumber, Seat... seats) {
+        if (seats.length == 0) {
+            throw new IllegalArgumentException("Flights with no seats are not allowed.");
+        }
         this.flightNumber = flightNumber;
         this.seatsByPrice = asList(seats);
         Collections.sort(this.seatsByPrice, Comparator.comparing(Seat::getPrice));

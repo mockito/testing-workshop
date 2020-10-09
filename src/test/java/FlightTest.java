@@ -43,9 +43,18 @@ public class FlightTest {
     @Test
     void should_fail_when_wrong_seat_number() {
         //expect
-        assertThatThrownBy(() -> new Flight().bookSeat("FOO"))
+        assertThatThrownBy(() -> new Flight(new Seat(100, "A1")).bookSeat("FOO"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Seat number not found: 'FOO'");
+    }
+
+    @Test
+    public void should_not_allow_flights_with_no_seats() {
+        //expect
+        assertThatThrownBy(
+                () -> new Flight("LH100"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Flights with no seats are not allowed.");
     }
 
     @Test
