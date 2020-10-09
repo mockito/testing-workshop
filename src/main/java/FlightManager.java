@@ -1,19 +1,24 @@
-import java.nio.IntBuffer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class FlightManager {
-    private Map<String, Integer> flights = new HashMap<>();
+import static java.util.Arrays.asList;
 
-    public void addFlight(String flightNo, int seats) {
-        flights.put(flightNo, seats);
+public class FlightManager {
+    private Map<String, List<Seat>> flights = new HashMap<>();
+
+    public void addFlight(String flightNo, Seat... seats) {
+        if (seats.length == 0) {
+            throw new IllegalArgumentException("Flights with no seats are not allowed.");
+        }
+        flights.put(flightNo, asList(seats));
     }
 
-    public int getAvailableSeats(String flightNo) {
-        Integer seats = flights.get(flightNo);
+    public Flight getFlight(String flightNo) {
+        List<Seat> seats = flights.get(flightNo);
         if (seats == null) {
             throw new FlightNotFoundException();
         }
-        return seats;
+        return new Flight(seats);
     }
 }
