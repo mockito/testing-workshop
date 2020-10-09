@@ -6,7 +6,7 @@ public class FlightBuilder {
     private static int counter = 0;
     private String from;
     private String to;
-    private String flightNumber = "LH10";
+    private String flightNumber = null;
     private List<Seat> seats = new LinkedList<>();
 
     public FlightBuilder between(String from, String to) {
@@ -16,6 +16,12 @@ public class FlightBuilder {
     }
 
     public Flight build() {
-        return new Flight(flightNumber + counter++, seats, from, to);
+        String flightNo = (this.flightNumber == null) ? "XX10" + counter++ : flightNumber;
+        return new Flight(flightNo, seats, from, to);
+    }
+
+    public FlightBuilder flightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
+        return this;
     }
 }

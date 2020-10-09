@@ -11,8 +11,10 @@ public class FlightManagerTest {
     @Test
     void should_keep_flights() {
         //given
-        manager.addFlight("LH100", new Seat(100, "A1"), new Seat(100, "A2"));
-        manager.addFlight("LH101", new Seat(100, "A1"));
+        manager.addFlights(
+                new FlightBuilder().flightNumber("LH100").build(),
+                new FlightBuilder().flightNumber("LH101").build()
+        );
 
         //when
         Flight flight = manager.getFlight("LH100");
