@@ -6,6 +6,8 @@ public class Flight {
 
     private final List<Seat> seatsByPrice;
     private final Map<String, Seat> seats = new HashMap<>();
+    private String origin;
+    private String destination;
     private final String flightNumber;
 
     public Flight(Seat... seats) {
@@ -22,6 +24,14 @@ public class Flight {
         for (Seat s : seats) {
             this.seats.put(s.getSeatNumber(), s);
         }
+    }
+
+    public Flight(String flightNumber, List<Seat> seats, String origin, String destination) {
+        this.flightNumber = flightNumber;
+        this.seatsByPrice = seats;
+        Collections.sort(this.seatsByPrice, Comparator.comparing(Seat::getPrice));
+        this.origin = origin;
+        this.destination = destination;
     }
 
     public int getSeats() {
@@ -53,5 +63,13 @@ public class Flight {
         return (int) this.seatsByPrice.stream()
                 .filter(seat -> !seat.isBooked())
                 .mapToInt(Seat::getPrice).average().getAsDouble();
+    }
+
+    public String getOrigin() {
+        return this.origin;
+    }
+
+    public String getDestination() {
+        return this.destination;
     }
 }

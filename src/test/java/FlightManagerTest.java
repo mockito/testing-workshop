@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,6 +21,23 @@ public class FlightManagerTest {
 
         //then
         assertEquals("LH100", flight.getFlightNumber());
+    }
+
+    @Test
+    void should_show_flights_between_cities() {
+        //given
+        Flight f1 = new FlightBuilder().between("KRK", "SFO").build();
+        Flight f2 = new FlightBuilder().between("KRK", "FRA").build();
+        Flight f3 = new FlightBuilder().between("WAW", "SFO").build();
+        Flight f4 = new FlightBuilder().between("KRK", "SFO").build();
+
+        manager.addFlights(f1, f2, f3, f4);
+
+        //when
+        List<Flight> flights = manager.getFlights("KRK", "SFO");
+
+        //then
+        assertThat(flights).containsExactly(f1, f4);
     }
 
     @Test
