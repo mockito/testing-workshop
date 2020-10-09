@@ -15,6 +15,15 @@ public class FlightTest {
     }
 
     @Test
+    public void should_show_cheapest_seat() {
+        //given
+        Flight flight = new Flight(new Seat(100), new Seat(50));
+
+        //expect
+        assertEquals(50, flight.getCheapestSeat().getPrice());
+    }
+
+    @Test
     public void should_book_seat() {
         //given
         Seat seat1D = new Seat(100, "1D");

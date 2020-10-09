@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FlightManagerTest {
 
@@ -13,19 +12,6 @@ public class FlightManagerTest {
         assertThatThrownBy(
                 () -> manager.getFlight("AA900"))
                 .isInstanceOf(FlightNotFoundException.class);
-    }
-
-    @Test
-    public void should_show_cheapest_seat() {
-        //given
-        manager.addFlight("LH123", new Seat(100), new Seat(50));
-        manager.addFlight("LH500", new Seat(30));
-
-        //when
-        Seat seat = manager.getFlight("LH123").getCheapestSeat();
-
-        //then
-        assertEquals(50, seat.getPrice());
     }
 
     @Test
