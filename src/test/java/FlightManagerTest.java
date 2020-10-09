@@ -8,19 +8,6 @@ public class FlightManagerTest {
     FlightManager manager = new FlightManager();
 
     @Test
-    public void should_show_available_seats() {
-        //given
-        manager.addFlight("LH123", new Seat(100), new Seat(100));
-        manager.addFlight("AA900", new Seat(200));
-
-        //when
-        int seats = manager.getFlight("LH123").getSeats();
-
-        //then
-        assertEquals(2, seats);
-    }
-
-    @Test
     public void should_deal_with_missing_flight() {
         //expect
         assertThatThrownBy(

@@ -6,6 +6,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FlightTest {
 
     @Test
+    public void should_provide_available_seats() {
+        //given
+        Flight flight = new Flight(new Seat(100), new Seat(100));
+
+        //expect
+        assertEquals(2, flight.getSeats());
+    }
+
+    @Test
     public void should_book_seat() {
         //given
         Seat seat1D = new Seat(100, "1D");
