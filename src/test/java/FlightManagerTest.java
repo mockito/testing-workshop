@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,11 +31,9 @@ public class FlightManagerTest {
 
         manager.addFlights(f1, f2, f3, f4);
 
-        //when
-        List<Flight> flights = manager.getFlights("KRK", "SFO");
-
-        //then
-        assertThat(flights).containsExactly(f1, f4);
+        //expect
+        assertThat(manager.getFlights("KRK", "SFO")).containsExactly(f1, f4);
+        assertThat(manager.getFlights("WAW", "FRA")).isEmpty();
     }
 
     @Test
