@@ -1,6 +1,6 @@
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FlightTest {
@@ -25,7 +25,7 @@ public class FlightTest {
     @Test
     void should_fail_when_wrong_seat_number() {
         //expect
-        Assertions.assertThatThrownBy(() -> new Flight().bookSeat("FOO"))
+        assertThatThrownBy(() -> new Flight().bookSeat("FOO"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Seat number not found: 'FOO'");
     }
@@ -33,9 +33,14 @@ public class FlightTest {
     @Test
     void should_not_allow_booking_same_seat_again() {
         //given
+        Flight flight = new Flight(new Seat(100, "A1"));
 
         //when
+        flight.bookSeat("A1");
 
         //then
+        assertThatThrownBy(() -> flight.bookSeat("A1"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Cannot book seat 'A1' because it is already booked");
     }
 }
