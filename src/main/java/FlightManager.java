@@ -1,24 +1,21 @@
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static java.util.Arrays.asList;
-
 public class FlightManager {
-    private Map<String, List<Seat>> flights = new HashMap<>();
+    private Map<String, Flight> flights = new HashMap<>();
 
     public void addFlight(String flightNo, Seat... seats) {
         if (seats.length == 0) {
             throw new IllegalArgumentException("Flights with no seats are not allowed.");
         }
-        flights.put(flightNo, asList(seats));
+        flights.put(flightNo, new Flight(flightNo, seats));
     }
 
     public Flight getFlight(String flightNo) {
-        List<Seat> seats = flights.get(flightNo);
-        if (seats == null) {
+        Flight flight = flights.get(flightNo);
+        if (flight == null) {
             throw new FlightNotFoundException();
         }
-        return new Flight(seats);
+        return flight;
     }
 }

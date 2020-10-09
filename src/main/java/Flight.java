@@ -6,13 +6,14 @@ public class Flight {
 
     private final List<Seat> seatsByPrice;
     private final Map<String, Seat> seats = new HashMap<>();
-
-    public Flight(List<Seat> seats) {
-        Collections.sort(seats, Comparator.comparing(Seat::getPrice));
-        this.seatsByPrice = seats;
-    }
+    private final String flightNumber;
 
     public Flight(Seat... seats) {
+        this("FOO", seats);
+    }
+
+    public Flight(String flightNumber, Seat... seats) {
+        this.flightNumber = flightNumber;
         this.seatsByPrice = asList(seats);
         Collections.sort(this.seatsByPrice, Comparator.comparing(Seat::getPrice));
         for (Seat s : seats) {
@@ -39,5 +40,9 @@ public class Flight {
         }
         seat.setBooked(true);
         return seat;
+    }
+
+    public String getFlightNumber() {
+        return this.flightNumber;
     }
 }
