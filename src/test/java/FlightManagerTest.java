@@ -53,6 +53,20 @@ public class FlightManagerTest {
     }
 
     @Test
+    void should_provide_flights_to_destination() {
+        //given
+        Flight f1 = new FlightBuilder().between("KRK", "SFO").build();
+        Flight f2 = new FlightBuilder().between("KRK", "FRA").build();
+        Flight f3 = new FlightBuilder().between("WAW", "FRA").build();
+
+        manager.addFlights(f1, f2, f3);
+
+        //expect
+        assertThat(manager.getFlightsTo("FRA")).containsExactly(f2, f3);
+        assertThat(manager.getFlightsTo("KRK")).isEmpty();
+    }
+
+    @Test
     public void should_deal_with_missing_flight() {
         //expect
         assertThatThrownBy(

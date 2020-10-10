@@ -20,15 +20,21 @@ public class FlightManager {
         stream(flights).forEach((f) -> this.flights.put(f.getFlightNumber(), f));
     }
 
-    public List<Flight> getFlights(String from, String to) {
+    public List<Flight> getFlights(String origin, String destination) {
         return flights.values().stream()
-                .filter(flight -> flight.getOrigin().equals(from) && flight.getDestination().equals(to))
+                .filter(flight -> flight.getOrigin().equals(origin) && flight.getDestination().equals(destination))
                 .collect(Collectors.toList());
     }
 
-    public List<Flight> getFlightsFrom(String from) {
+    public List<Flight> getFlightsFrom(String origin) {
         return flights.values().stream()
-                .filter(flight -> flight.getOrigin().equals(from))
+                .filter(flight -> flight.getOrigin().equals(origin))
+                .collect(Collectors.toList());
+    }
+
+    public List<Flight> getFlightsTo(String destination) {
+        return flights.values().stream()
+                .filter(flight -> flight.getDestination().equals(destination))
                 .collect(Collectors.toList());
     }
 }
