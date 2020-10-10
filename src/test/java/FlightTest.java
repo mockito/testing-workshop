@@ -8,7 +8,9 @@ public class FlightTest {
     @Test
     public void should_provide_available_seats() {
         //given
-        Flight flight = new Flight(new Seat(100), new Seat(100));
+        Flight flight = new FlightBuilder().seats(
+                new SeatBuilder().build(), new SeatBuilder().build()
+        ).build();
 
         //expect
         assertEquals(2, flight.getSeats());
@@ -17,7 +19,10 @@ public class FlightTest {
     @Test
     public void should_show_cheapest_seat() {
         //given
-        Flight flight = new Flight(new Seat(100), new Seat(50));
+        Flight flight = new FlightBuilder().seats(
+                new SeatBuilder().price(100).build(),
+                new SeatBuilder().price(50).build()
+        ).build();
 
         //expect
         assertEquals(50, flight.getCheapestSeat().getPrice());

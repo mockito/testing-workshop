@@ -1,6 +1,8 @@
 import java.util.LinkedList;
 import java.util.List;
 
+import static java.util.Arrays.asList;
+
 public class FlightBuilder {
 
     private static int counter = 0;
@@ -22,6 +24,11 @@ public class FlightBuilder {
 
     public FlightBuilder flightNumber(String flightNumber) {
         this.flightNumber = flightNumber;
+        return this;
+    }
+
+    public FlightBuilder seats(Seat... seats) {
+        this.seats = asList(seats);
         return this;
     }
 }
