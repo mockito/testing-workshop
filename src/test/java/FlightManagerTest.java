@@ -34,7 +34,7 @@ public class FlightManagerTest {
         manager.addFlights(f1, f2, f3, f4);
 
         //expect
-        assertThat(manager.getFlights("KRK", "SFO")).containsExactly(f1, f4);
+        assertThat(manager.getFlights("KRK", "SFO")).containsOnly(f1, f4);
         assertThat(manager.getFlights("WAW", "FRA")).isEmpty();
     }
 
@@ -72,5 +72,26 @@ public class FlightManagerTest {
         assertThatThrownBy(
                 () -> manager.getFlight("AA900"))
                 .isInstanceOf(FlightNotFoundException.class);
+    }
+
+    @Test
+    void should_provide_seats_cheaper_than_default() {
+        //given
+        Seat s1 = new SeatBuilder().category(Seat.Category.COACH).price(50).build();
+        Seat s2 = new SeatBuilder().category(Seat.Category.BUSINESS).price(100).build();
+        Seat s3 = new SeatBuilder().category(Seat.Category.BUSINESS).price(199).build();
+        Seat s4 = new SeatBuilder().category(Seat.Category.BUSINESS).price(300).build();
+
+        Flight flight = new FlightBuilder()
+                .seats(s1, s2, s3, s4)
+                .defaultPrice(Seat.Category.COACH, 50)
+                .defaultPrice(Seat.Category.BUSINESS, 200).build();
+
+        //expect
+        assertThat(flight.getSeatsCheaperThanDefault(Seat.Category.BUSINESS)).containsExactly(s2, s3);
+        assertThat(flight.getSeatsCheaperThanDefault(Seat.Category.COACH)).isEmpty();
+
+        //TODO edge case:
+//        assertThat(flight.getSeatsCheaperThanDefault(Seat.Category.FIRST)).isEmpty();
     }
 }

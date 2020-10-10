@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,7 +60,7 @@ public class FlightTest {
     public void should_not_allow_flights_with_no_seats() {
         //expect
         assertThatThrownBy(
-                () -> new Flight("LH100", emptyList(), "KRK", "SFO"))
+                () -> new Flight("LH100", emptyList(), "KRK", "SFO", new HashMap<>()))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Flights with no seats are not allowed.");
     }

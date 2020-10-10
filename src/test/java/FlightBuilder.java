@@ -1,5 +1,7 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
 
@@ -10,6 +12,7 @@ public class FlightBuilder {
     private String to;
     private String flightNumber = null;
     private List<Seat> seats = new LinkedList<>();
+    private Map<Seat.Category, Integer> defaultPrices = new HashMap<>();
 
     public FlightBuilder between(String from, String to) {
         this.from = from;
@@ -20,7 +23,7 @@ public class FlightBuilder {
     public Flight build() {
         String flightNo = (this.flightNumber == null) ? "XX10" + counter++ : flightNumber;
         List<Seat> seats = (this.seats.isEmpty()) ? asList(new SeatBuilder().build()) : this.seats;
-        return new Flight(flightNo, seats, from, to);
+        return new Flight(flightNo, seats, from, to, defaultPrices);
     }
 
     public FlightBuilder flightNumber(String flightNumber) {
@@ -30,6 +33,11 @@ public class FlightBuilder {
 
     public FlightBuilder seats(Seat... seats) {
         this.seats = asList(seats);
+        return this;
+    }
+
+    public FlightBuilder defaultPrice(Seat.Category category, int price) {
+        this.defaultPrices.put(category, price);
         return this;
     }
 }

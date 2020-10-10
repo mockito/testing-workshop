@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Flight {
 
@@ -7,8 +8,11 @@ public class Flight {
     private final String origin;
     private final String destination;
     private final String flightNumber;
+    private final Map<Seat.Category, Integer> defaultPrices;
 
-    public Flight(String flightNumber, List<Seat> seats, String origin, String destination) {
+    public Flight(String flightNumber, List<Seat> seats, String origin, String destination,
+                  Map<Seat.Category, Integer> defaultPrices) {
+        this.defaultPrices = defaultPrices;
         if (seats.size() == 0) {
             throw new IllegalArgumentException("Flights with no seats are not allowed.");
         }
@@ -67,5 +71,17 @@ public class Flight {
             throw new SeatNotFoundException("No seats with '" + category + "' category found");
         }
         return (int) result.getAsDouble();
+    }
+
+    public List<Seat> getSeatsCheaperThanDefault(Seat.Category category) {
+        int defaultPrice = defaultPrices.get(category);
+        return this.seatsByPrice.stream()
+                .filter(seat -> seat.getCategory() == category && seat.getPrice() < defaultPrice)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String toString() {
+        return origin + ':' + destination;
     }
 }
