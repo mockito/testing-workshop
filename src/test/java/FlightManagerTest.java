@@ -90,8 +90,16 @@ public class FlightManagerTest {
         //expect
         assertThat(flight.getSeatsCheaperThanDefault(Seat.Category.BUSINESS)).containsExactly(s2, s3);
         assertThat(flight.getSeatsCheaperThanDefault(Seat.Category.COACH)).isEmpty();
+    }
 
-        //TODO edge case:
-//        assertThat(flight.getSeatsCheaperThanDefault(Seat.Category.FIRST)).isEmpty();
+    @Test
+    void should_fail_gracefully_when_no_default_price_provided() {
+        //given
+        Flight flight = new FlightBuilder().build();
+
+        //expect
+        assertThatThrownBy(() -> flight.getSeatsCheaperThanDefault(Seat.Category.FIRST))
+                .isInstanceOf(DefaultPriceNotConfiguredException.class)
+                .hasMessage("No default price configured for category 'FIRST'");
     }
 }

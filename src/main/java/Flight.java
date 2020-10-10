@@ -74,7 +74,11 @@ public class Flight {
     }
 
     public List<Seat> getSeatsCheaperThanDefault(Seat.Category category) {
-        int defaultPrice = defaultPrices.get(category);
+        Integer defaultPrice = defaultPrices.get(category);
+        if (defaultPrice == null) {
+            throw new DefaultPriceNotConfiguredException(
+                    "No default price configured for category '" + category + "'");
+        }
         return this.seatsByPrice.stream()
                 .filter(seat -> seat.getCategory() == category && seat.getPrice() < defaultPrice)
                 .collect(Collectors.toList());
