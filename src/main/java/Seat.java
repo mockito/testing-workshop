@@ -1,12 +1,20 @@
 public class Seat {
 
+    private final Category category;
+
     private final int price;
     private final String seatNumber;
-    private boolean booked;
 
-    public Seat(int price, String seatNumber) {
+    public Seat(int price, String seatNumber, Category category) {
         this.price = price;
         this.seatNumber = seatNumber;
+        this.category = category;
+    }
+
+    private boolean booked;
+
+    public Category getCategory() {
+        return category;
     }
 
     public Integer getPrice() {
@@ -24,4 +32,6 @@ public class Seat {
     public String getSeatNumber() {
         return seatNumber;
     }
+
+    enum Category {COACH, BUSINESS, FIRST}
 }

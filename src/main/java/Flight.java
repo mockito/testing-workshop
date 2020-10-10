@@ -58,4 +58,10 @@ public class Flight {
     public String getDestination() {
         return this.destination;
     }
+
+    public int getAveragePrice(Seat.Category category) {
+        return (int) this.seatsByPrice.stream()
+                .filter(seat -> seat.getCategory() == category)
+                .mapToInt(Seat::getPrice).average().getAsDouble();
+    }
 }

@@ -80,7 +80,7 @@ public class FlightTest {
     }
 
     @Test
-    void should_provide_average_price() {
+    void should_provide_average_price_for_unbooked() {
         //given
         Flight flight = new FlightBuilder().seats(
                 new SeatBuilder().seatNumber("A1").price(50).build(),
@@ -93,5 +93,22 @@ public class FlightTest {
 
         //then
         assertEquals(75, flight.getAveragePriceNonBooked());
+    }
+
+    @Test
+    void should_provide_average_price_for_category() {
+        //given
+        Flight flight = new FlightBuilder().seats(
+                new SeatBuilder().category(Seat.Category.COACH).price(50).build(),
+                new SeatBuilder().category(Seat.Category.COACH).price(100).build(),
+                new SeatBuilder().category(Seat.Category.BUSINESS).price(200).build()
+        ).build();
+
+        //expect
+        assertEquals(75, flight.getAveragePrice(Seat.Category.COACH));
+        assertEquals(200, flight.getAveragePrice(Seat.Category.BUSINESS));
+
+        //TODO throw exception when no seats for given category
+//        assertEquals(200, flight.getAveragePrice(Seat.Category.BUSINESS));
     }
 }
