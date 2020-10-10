@@ -25,4 +25,10 @@ public class FlightManager {
                 .filter(flight -> flight.getOrigin().equals(from) && flight.getDestination().equals(to))
                 .collect(Collectors.toList());
     }
+
+    public List<Flight> getFlightsFrom(String from) {
+        return flights.values().stream()
+                .filter(flight -> flight.getOrigin().equals(from))
+                .collect(Collectors.toList());
+    }
 }

@@ -39,6 +39,20 @@ public class FlightManagerTest {
     }
 
     @Test
+    void should_provide_flights_from_origin() {
+        //given
+        Flight f1 = new FlightBuilder().between("KRK", "SFO").build();
+        Flight f2 = new FlightBuilder().between("KRK", "FRA").build();
+        Flight f3 = new FlightBuilder().between("WAW", "SFO").build();
+
+        manager.addFlights(f1, f2, f3);
+
+        //expect
+        assertThat(manager.getFlightsFrom("KRK")).containsExactly(f1, f2);
+        assertThat(manager.getFlightsFrom("FRA")).isEmpty();
+    }
+
+    @Test
     public void should_deal_with_missing_flight() {
         //expect
         assertThatThrownBy(
