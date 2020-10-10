@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,11 +32,11 @@ public class FlightTest {
     @Test
     public void should_book_seat() {
         //given
-        Seat seat1D = new Seat(100, "1D");
-        Seat seat1E = new Seat(50, "1E");
+        Seat seat1D = new SeatBuilder().seatNumber("1D").build();
+        Seat seat1E = new SeatBuilder().seatNumber("1E").build();
         assertFalse(seat1D.isBooked());
 
-        Flight flight = new Flight(seat1D, seat1E);
+        Flight flight = new FlightBuilder().seats(seat1D, seat1E).build();
 
         //when
         Seat seat = flight.bookSeat("1D");
@@ -48,16 +49,16 @@ public class FlightTest {
     @Test
     void should_fail_when_wrong_seat_number() {
         //expect
-        assertThatThrownBy(() -> new Flight(new Seat(100, "A1")).bookSeat("FOO"))
+        assertThatThrownBy(() -> new FlightBuilder().build().bookSeat("X1"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Seat number not found: 'FOO'");
+                .hasMessage("Seat number not found: 'X1'");
     }
 
     @Test
     public void should_not_allow_flights_with_no_seats() {
         //expect
         assertThatThrownBy(
-                () -> new Flight("LH100"))
+                () -> new Flight("LH100", emptyList(), "KRK", "SFO"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("Flights with no seats are not allowed.");
     }
@@ -65,7 +66,9 @@ public class FlightTest {
     @Test
     void should_not_allow_booking_same_seat_again() {
         //given
-        Flight flight = new Flight(new Seat(100, "A1"));
+        Flight flight = new FlightBuilder().seats(
+                new SeatBuilder().seatNumber("A1").build()
+        ).build();
 
         //when
         flight.bookSeat("A1");
@@ -79,10 +82,11 @@ public class FlightTest {
     @Test
     void should_provide_average_price() {
         //given
-        Flight flight = new Flight(
-                new Seat(50, "A1"),
-                new Seat(100, "A2"),
-                new Seat(200, "B1"));
+        Flight flight = new FlightBuilder().seats(
+                new SeatBuilder().seatNumber("A1").price(50).build(),
+                new SeatBuilder().seatNumber("A2").price(100).build(),
+                new SeatBuilder().seatNumber("B1").price(200).build()
+        ).build();
 
         //when
         flight.bookSeat("B1");

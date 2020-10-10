@@ -1,5 +1,6 @@
 public class SeatBuilder {
     private int price;
+    private String seatNumber = "Z1";
 
     public SeatBuilder price(int price) {
         this.price = price;
@@ -7,6 +8,11 @@ public class SeatBuilder {
     }
 
     public Seat build() {
-        return new Seat(price);
+        return new Seat(price, seatNumber);
+    }
+
+    public SeatBuilder seatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
+        return this;
     }
 }

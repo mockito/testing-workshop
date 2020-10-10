@@ -4,10 +4,6 @@ public class Seat {
     private final String seatNumber;
     private boolean booked;
 
-    public Seat(int price) {
-        this(price, "dummy");
-    }
-
     public Seat(int price, String seatNumber) {
         this.price = price;
         this.seatNumber = seatNumber;

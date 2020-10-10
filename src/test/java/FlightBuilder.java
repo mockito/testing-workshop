@@ -19,6 +19,7 @@ public class FlightBuilder {
 
     public Flight build() {
         String flightNo = (this.flightNumber == null) ? "XX10" + counter++ : flightNumber;
+        List<Seat> seats = (this.seats.isEmpty()) ? asList(new SeatBuilder().build()) : this.seats;
         return new Flight(flightNo, seats, from, to);
     }
 

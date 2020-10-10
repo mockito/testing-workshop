@@ -1,35 +1,21 @@
 import java.util.*;
 
-import static java.util.Arrays.asList;
-
 public class Flight {
 
     private final List<Seat> seatsByPrice;
     private final Map<String, Seat> seats = new HashMap<>();
-    private String origin;
-    private String destination;
+    private final String origin;
+    private final String destination;
     private final String flightNumber;
 
-    public Flight(Seat... seats) {
-        this("FOO", seats);
-    }
-
-    public Flight(String flightNumber, Seat... seats) {
-        if (seats.length == 0) {
+    public Flight(String flightNumber, List<Seat> seats, String origin, String destination) {
+        if (seats.size() == 0) {
             throw new IllegalArgumentException("Flights with no seats are not allowed.");
         }
         this.flightNumber = flightNumber;
-        this.seatsByPrice = asList(seats);
-        Collections.sort(this.seatsByPrice, Comparator.comparing(Seat::getPrice));
-        for (Seat s : seats) {
-            this.seats.put(s.getSeatNumber(), s);
-        }
-    }
-
-    public Flight(String flightNumber, List<Seat> seats, String origin, String destination) {
-        this.flightNumber = flightNumber;
         this.seatsByPrice = seats;
         Collections.sort(this.seatsByPrice, Comparator.comparing(Seat::getPrice));
+        seats.stream().forEach((s) -> this.seats.put(s.getSeatNumber(), s));
         this.origin = origin;
         this.destination = destination;
     }
