@@ -108,7 +108,8 @@ public class FlightTest {
         assertEquals(75, flight.getAveragePrice(Seat.Category.COACH));
         assertEquals(200, flight.getAveragePrice(Seat.Category.BUSINESS));
 
-        //TODO throw exception when no seats for given category
-//        assertEquals(200, flight.getAveragePrice(Seat.Category.BUSINESS));
+        assertThatThrownBy(() -> flight.getAveragePrice(Seat.Category.FIRST))
+                .isInstanceOf(SeatNotFoundException.class)
+                .hasMessage("No seats with 'FIRST' category found");
     }
 }

@@ -60,8 +60,12 @@ public class Flight {
     }
 
     public int getAveragePrice(Seat.Category category) {
-        return (int) this.seatsByPrice.stream()
+        OptionalDouble result = this.seatsByPrice.stream()
                 .filter(seat -> seat.getCategory() == category)
-                .mapToInt(Seat::getPrice).average().getAsDouble();
+                .mapToInt(Seat::getPrice).average();
+        if (!result.isPresent()) {
+            throw new SeatNotFoundException("No seats with '" + category + "' category found");
+        }
+        return (int) result.getAsDouble();
     }
 }
