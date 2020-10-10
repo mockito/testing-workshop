@@ -48,7 +48,7 @@ public class FlightManagerTest {
         manager.addFlights(f1, f2, f3);
 
         //expect
-        assertThat(manager.getFlightsFrom("KRK")).containsExactly(f1, f2);
+        assertThat(manager.getFlightsFrom("KRK")).containsOnly(f1, f2);
         assertThat(manager.getFlightsFrom("FRA")).isEmpty();
     }
 
@@ -62,7 +62,7 @@ public class FlightManagerTest {
         manager.addFlights(f1, f2, f3);
 
         //expect
-        assertThat(manager.getFlightsTo("FRA")).containsExactly(f2, f3);
+        assertThat(manager.getFlightsTo("FRA")).containsOnly(f2, f3);
         assertThat(manager.getFlightsTo("KRK")).isEmpty();
     }
 
@@ -88,7 +88,7 @@ public class FlightManagerTest {
                 .defaultPrice(Seat.Category.BUSINESS, 200).build();
 
         //expect
-        assertThat(flight.getSeatsCheaperThanDefault(Seat.Category.BUSINESS)).containsExactly(s2, s3);
+        assertThat(flight.getSeatsCheaperThanDefault(Seat.Category.BUSINESS)).containsOnly(s2, s3);
         assertThat(flight.getSeatsCheaperThanDefault(Seat.Category.COACH)).isEmpty();
     }
 
